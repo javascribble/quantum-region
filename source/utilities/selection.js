@@ -1,41 +1,46 @@
-const rectanglesOverlap = (a, b) => !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
-const distanceSquaredVector2Object = (v2a, v2b) => Math.pow(v2a.x - v2b.x, 2) + Math.pow(v2a.y - v2b.y, 2);
+import { rectanglesOverlap, distanceSquared } from '../functions/math.js';
 
-export const enableSelection = (element, region) => {
-    const { style, parentElement } = element;
+export const enableSelection = (element, selection) => {
+    const style = selection.style;
     const origin = {};
 
-    const draw = (event) => {
-        const x = event.clientX, y = event.clientY;
-        style.top = `${y < origin.y ? y : origin.y}px`;
-        style.left = `${x < origin.x ? x : origin.x}px`;
-        style.width = `${Math.abs(x - origin.x)}px`;
-        style.height = `${Math.abs(y - origin.y)}px`;
-        if (!quantum.shown(element) && distanceSquaredVector2Object(origin, { x, y }) > 30) {
-            quantum.show(element);
-        }
-    };
+    const draw = event => {
+        const position = { x: event.clientX, y: event.clientY };
+        Object.assign(style, {
+            top: `${position.y < origin.y ? position.y : origin.y}px`,
+            left: `${position.x < origin.x ? position.x : origin.x}px`,
+            width: `${Math.abs(position.x - origin.x)}px`,
+            height: `${Math.abs(position.y - origin.y)}px`
+        });
 
-    const open = (event) => {
-        parentElement.addEventListener('mousemove', draw);
+        if (!quantum.shown(style) && distanceSquared(origin, position) > 30) {
+            quantum.show(style);
+        }
+    }
+
+    const open = event => {
+        element.addEventListener('mousemove', draw);
         origin.x = event.clientX;
         origin.y = event.clientY;
-    };
+    }
 
-    const close = (event) => {
-        parentElement.removeEventListener('mousemove', draw);
-        if (quantum.shown(element)) {
-            quantum.hide(element)
-            const selectEvent = new Event('select');
-            const box = element.getBoundingClientRect();
-            parentElement.querySelectorAll(selector).forEach(element => {
-                if (rectanglesOverlap(box, element.getBoundingClientRect())) {
-                    element.dispatchEvent(selectEvent);
-                }
-            });
+    const close = event => {
+        element.removeEventListener('mousemove', draw);
+        if (quantum.shown(style)) {
+            quantum.hide(style);
+            // const elements = this.querySelectorAll(element.selector || '*');
+            // if (elements.length) {
+            //     const selectEvent = new Event('select');
+            //     const selectionArea = this.getBoundingClientRect();
+            //     elements.forEach(element => {
+            //         if (rectanglesOverlap(selectionArea, element.getBoundingClientRect())) {
+            //             element.dispatchEvent(selectEvent);
+            //         }
+            //     });
+            // }
         }
-    };
+    }
 
-    parentElement.addEventListener('mousedown', open);
-    parentElement.addEventListener('mouseup', close);
+    element.addEventListener('mousedown', open);
+    element.addEventListener('mouseup', close);
 };
