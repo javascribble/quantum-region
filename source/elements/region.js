@@ -5,14 +5,12 @@ export class Region extends quantum.Component {
     constructor() {
         super();
 
-        const selection = this.shadowRoot.querySelector('div');
-
-        enableSelection(this, selection);
+        enableSelection(this);
     }
 
     static template = quantum.template(html);
 
-    static get observedAttributes() { return ['selector']; }
+    static get observedAttributes() { return ['mode', 'event', 'selector']; }
 }
 
 quantum.define('quantum-region', Region);

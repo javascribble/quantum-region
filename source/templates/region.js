@@ -1,16 +1,13 @@
 export default `
 <style>
     :host {
-        display: block;
-        height: 100%;
-    }
-
-    div {
-        z-index: var(--z-index, 1);
         border: var(--border);
         visibility: hidden;
         position: absolute;
     }
+
+    :host([mode="ellipse"]) {
+        border-radius: 100%;
+    }
 </style>
-<div></div>
 `;

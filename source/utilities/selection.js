@@ -1,7 +1,7 @@
 import { rectanglesOverlap, distanceSquared } from '../functions/math.js';
 
-export const enableSelection = (element, selection) => {
-    const style = selection.style;
+export const enableSelection = (selection) => {
+    const { style, parentElement } = selection;
     const origin = {};
 
     const draw = event => {
@@ -19,28 +19,34 @@ export const enableSelection = (element, selection) => {
     }
 
     const open = event => {
-        element.addEventListener('mousemove', draw);
+        parentElement.addEventListener('mousemove', draw);
         origin.x = event.clientX;
         origin.y = event.clientY;
     }
 
     const close = event => {
-        element.removeEventListener('mousemove', draw);
+        parentElement.removeEventListener('mousemove', draw);
         if (quantum.shown(style)) {
             quantum.hide(style);
-            // const elements = this.querySelectorAll(element.selector || '*');
-            // if (elements.length) {
-            //     const selectEvent = new Event('select');
-            //     const selectionArea = this.getBoundingClientRect();
-            //     elements.forEach(element => {
-            //         if (rectanglesOverlap(selectionArea, element.getBoundingClientRect())) {
-            //             element.dispatchEvent(selectEvent);
-            //         }
-            //     });
-            // }
+            const elements = parentElement.querySelectorAll(selection.selector || '*');
+            if (elements.length) {
+                const selectEvent = new Event(selection.event || 'select');
+                switch (selection.mode) {
+                    // TODO: case 'ellipse': break;
+                    default:
+                        const selectionArea = selection.getBoundingClientRect();
+                        for (const element of elements) {
+                            if (rectanglesOverlap(selectionArea, element.getBoundingClientRect())) {
+                                element.dispatchEvent(selectEvent);
+                            }
+                        }
+
+                        break;
+                }
+            }
         }
     }
 
-    element.addEventListener('mousedown', open);
-    element.addEventListener('mouseup', close);
+    parentElement.addEventListener('mousedown', open);
+    parentElement.addEventListener('mouseup', close);
 };

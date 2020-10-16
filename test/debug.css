@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
+button {
+    user-select: none;
+}
+
 quantum-region {
     --border: 1px dashed black;
 }
