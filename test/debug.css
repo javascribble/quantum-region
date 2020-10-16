@@ -2,3 +2,7 @@ body {
     visibility: hidden;
     margin: 0;
 }
+
+quantum-region {
+    --border: 1px dashed chartreuse;
+}
