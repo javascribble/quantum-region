@@ -1,16 +1,17 @@
+import { Component, template, define } from '../import.js';
 import { enableSelection } from '../utilities/selection.js';
 import html from '../templates/region.js';
 
-export class Region extends quantum.Component {
+export class Region extends Component {
     constructor() {
         super();
 
         enableSelection(this);
     }
 
-    static template = quantum.template(html);
+    static template = template(html);
 
     static get observedAttributes() { return ['mode', 'event', 'selector']; }
 }
 
-quantum.define('quantum-region', Region);
+define('quantum-region', Region);

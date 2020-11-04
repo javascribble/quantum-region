@@ -1,3 +1,4 @@
+import { shown, show, hide } from '../import.js';
 import { rectanglesOverlap, distanceSquared } from '../functions/math.js';
 
 export const enableSelection = (selection) => {
@@ -13,8 +14,8 @@ export const enableSelection = (selection) => {
             height: `${Math.abs(position.y - origin.y)}px`
         });
 
-        if (!quantum.shown(style) && distanceSquared(origin, position) > 30) {
-            quantum.show(style);
+        if (!shown(style) && distanceSquared(origin, position) > 30) {
+            show(style);
         }
     }
 
@@ -26,8 +27,8 @@ export const enableSelection = (selection) => {
 
     const close = event => {
         parentElement.removeEventListener('mousemove', draw);
-        if (quantum.shown(style)) {
-            quantum.hide(style);
+        if (shown(style)) {
+            hide(style);
             const elements = parentElement.querySelectorAll(selection.selector || '*');
             if (elements.length) {
                 const selectEvent = new Event(selection.event || 'select');
