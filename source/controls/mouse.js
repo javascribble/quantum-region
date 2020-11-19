@@ -3,12 +3,12 @@ import { distanceThreshold } from '../constants/options.js';
 import { distanceSquared, rectifyVectors } from '../utilities/math.js';
 
 export const enableMouse = (element) => {
-    const { style, parentElement } = element;
+    const { style } = element;
     const origin = {};
 
     const open = event => {
         if (!event.target.draggable) {
-            parentElement.addEventListener('mousemove', draw);
+            document.addEventListener('mousemove', draw);
             origin.x = event.clientX;
             origin.y = event.clientY;
         }
@@ -23,13 +23,13 @@ export const enableMouse = (element) => {
     };
 
     const close = event => {
-        parentElement.removeEventListener('mousemove', draw);
+        document.removeEventListener('mousemove', draw);
         if (shown(style)) {
             hide(style);
             element.dispatch();
         }
     };
 
-    parentElement.addEventListener('mousedown', open);
-    parentElement.addEventListener('mouseup', close);
+    document.addEventListener('mousedown', open);
+    document.addEventListener('mouseup', close);
 };

@@ -15,7 +15,7 @@ export class Region extends Component {
     static get observedAttributes() { return ['event', 'selector']; }
 
     dispatch(event = 'select', selector = '*') {
-        const elements = this.parentElement.querySelectorAll(this.selector || selector);
+        const elements = document.querySelectorAll(this.selector || selector);
         if (elements.length) {
             const selectEvent = new Event(this.event || event);
             const selectArea = this.getBoundingClientRect();
