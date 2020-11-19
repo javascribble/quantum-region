@@ -1,6 +1,6 @@
 import { shown, show, hide } from '../import.js';
 import { distanceThreshold } from '../constants/options.js';
-import { distanceSquared, rectifyVectors } from './math.js';
+import { distanceSquared, rectifyVectors } from '../utilities/math.js';
 
 export const enableMouse = (element) => {
     const { style, parentElement } = element;

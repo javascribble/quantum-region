@@ -1,6 +1,6 @@
 import { Component, template, define } from '../import.js';
 import { elementsIntersect } from '../utilities/math.js';
-import { enableMouse } from '../utilities/mouse.js';
+import { enableMouse } from '../controls/mouse.js';
 import html from '../templates/region.js';
 
 export class Region extends Component {
