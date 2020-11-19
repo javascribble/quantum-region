@@ -5,9 +5,5 @@ export default `
         visibility: hidden;
         position: absolute;
     }
-
-    :host([mode="ellipse"]) {
-        border-radius: 100%;
-    }
 </style>
 `;

@@ -11,7 +11,7 @@ export class Region extends Component {
 
     static template = template(html);
 
-    static get observedAttributes() { return ['mode', 'event', 'selector']; }
+    static get observedAttributes() { return ['event', 'selector']; }
 }
 
 define('quantum-region', Region);
