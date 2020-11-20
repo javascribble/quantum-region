@@ -7,7 +7,7 @@ export const enableMouse = (element) => {
     const origin = {};
 
     const open = event => {
-        if (!event.target.draggable) {
+        if (event.composedPath().every(target => !target.draggable)) {
             document.addEventListener('mousemove', draw);
             origin.x = event.clientX;
             origin.y = event.clientY;
