@@ -1,5 +1,5 @@
-import '/node_modules/@javascribble/quantum/source/export.js';
-import '/source/export.js';
+import '/node_modules/@javascribble/quantum/source/main.js';
+import '/source/main.js';
 
 for (let i = 0; i < 20; i++) {
     for (let ii = 0; ii < 20; ii++) {
