@@ -2,6 +2,8 @@ import { elementsIntersect } from '../utilities/math.js';
 import { enableMouse } from '../controls/mouse.js';
 import html from '../templates/region.js';
 
+const { Component, template, define } = quantum;
+
 export class Region extends Component {
     constructor() {
         super();
