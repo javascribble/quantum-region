@@ -1,3 +1,3 @@
-import * as region from './elements/region.js';
+import { Region } from './elements/region.js';
 
-Object.assign(quantum, region);
+Quantum.Region = Region;

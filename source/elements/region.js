@@ -2,16 +2,12 @@ import { elementsIntersect } from '../utilities/math.js';
 import { enableMouse } from '../controls/mouse.js';
 import html from '../templates/region.js';
 
-const { Component, template, define } = quantum;
-
-export class Region extends Component {
+export class Region extends Quantum {
     constructor() {
         super();
 
         enableMouse(this);
     }
-
-    static template = template(html);
 
     static get observedAttributes() { return ['event', 'selector']; }
 
@@ -29,4 +25,4 @@ export class Region extends Component {
     }
 }
 
-define('quantum-region', Region);
+Region.define('quantum-region', html);
