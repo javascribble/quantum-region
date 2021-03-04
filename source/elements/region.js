@@ -1,6 +1,5 @@
 import { elementsIntersect } from '../utilities/math.js';
 import { enableMouse } from '../controls/mouse.js';
-import html from '../templates/region.js';
 
 export class Region extends Quantum {
     constructor() {
@@ -24,5 +23,3 @@ export class Region extends Quantum {
         }
     }
 }
-
-Region.define('quantum-region', html);
