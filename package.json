@@ -1,15 +1,16 @@
 {
     "name": "@javascribble/quantum-region",
     "description": "",
-    "version": "1.2.3",
+    "version": "1.4.0",
     "license": "MIT",
     "dependencies": {
-        "@javascribble/quantum": "^1.2.8"
+        "@javascribble/quantum": "^1.5.0"
     },
     "devDependencies": {
         "live-server": "*"
     },
     "scripts": {
+        "build": "cd ../rollup-quantum-build && npm start ../quantum-region/source/main.js ../quantum-region/build",
         "start": "live-server --open=/test/debug.html",
         "postversion": "npm publish --access public"
     },
